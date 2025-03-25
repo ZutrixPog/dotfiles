@@ -1,4 +1,4 @@
-vim.g.mapleader = "<Space>"
+vim.g.mapleader = " "
 vim.opt.clipboard = 'unnamedplus'   -- use system clipboard 
 vim.opt.completeopt = {'menu', 'menuone', 'noselect'}
 

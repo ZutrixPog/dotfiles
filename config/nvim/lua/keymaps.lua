@@ -1,5 +1,4 @@
 -- Define common options
-vim.g.mapleader = " "
 local opts = {
 	noremap = true, -- non-recursive
 	silent = true, -- do not show message
@@ -73,3 +72,7 @@ end
 vim.keymap.set({"n", "v", "i", "t"}, "<M-1>", "<cmd>lua horizontal_term_toggle()<CR>", { noremap = true, silent = true })
 vim.keymap.set({"n", "v", "i", "t"}, "<M-2>", "<cmd>lua vertical_term_toggle()<CR>", { noremap = true, silent = true })
 vim.keymap.set({"n", "v", "i", "t"}, "<M-3>", "<cmd>lua float_term_toggle()<CR>", { noremap = true, silent = true })
+
+-- For Dashboard
+vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR>", { noremap = true, silent = true })
+
