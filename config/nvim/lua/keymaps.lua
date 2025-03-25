@@ -1,5 +1,5 @@
 -- Define common options
-vim.g.mapleader = "<Space>"
+vim.g.mapleader = " "
 local opts = {
 	noremap = true, -- non-recursive
 	silent = true, -- do not show message
