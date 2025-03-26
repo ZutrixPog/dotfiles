@@ -26,7 +26,7 @@ vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
 
 -- Better Editting
-vim.keymap.set({"n", "i", "x"}, "<leader>w", ":write<CR>", opts)
+vim.keymap.set({"n", "i", "x"}, "<leader>w", ":w!<CR>", opts)
 vim.keymap.set("n", "<leader>fd", "_d", opts)
 vim.keymap.set("n", "<leader>fd", "_d", opts)
 vim.keymap.set("n", "<leader>fp", "_d", opts)
@@ -61,29 +61,6 @@ vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
-
--- For toggleterm
-local Terminal = require("toggleterm.terminal").Terminal
-
--- Create terminals for different modes
-local horizontal_term = Terminal:new({ direction = "horizontal" })
-local vertical_term = Terminal:new({ direction = "vertical" })
-local float_term = Terminal:new({ direction = "float" })
-
-function horizontal_term_toggle()
-  horizontal_term:toggle()
-end
-function vertical_term_toggle()
-  vertical_term:toggle()
-end
-function float_term_toggle()
-  float_term:toggle()
-end
-
--- Key mappings for opening different terminals
-vim.keymap.set({"n", "v", "i", "t"}, "<M-1>", "<cmd>lua horizontal_term_toggle()<CR>", { noremap = true, silent = true })
-vim.keymap.set({"n", "v", "i", "t"}, "<M-2>", "<cmd>lua vertical_term_toggle()<CR>", { noremap = true, silent = true })
-vim.keymap.set({"n", "v", "i", "t"}, "<M-3>", "<cmd>lua float_term_toggle()<CR>", { noremap = true, silent = true })
 
 -- For Dashboard
 vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR>", { noremap = true, silent = true })

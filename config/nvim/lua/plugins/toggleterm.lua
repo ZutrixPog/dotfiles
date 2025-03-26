@@ -8,7 +8,13 @@ return {
         end
 
         toggleterm.setup({
-            size = 20,
+            size = function(term)
+                if term.direction == "horizontal" then
+                    return 15
+                elseif term.direction == "vertical" then
+                    return vim.o.columns * 0.4
+                end
+            end,
             open_mapping = [[<C-\>]], -- how to open a new terminal
             hide_numbers = true, -- hide the number column in toggleterm buffers
             close_on_exit = true, -- close the terminal window when the process exits
@@ -45,5 +51,29 @@ return {
 
         -- If you only want these mappings for toggle term use term://*toggleterm#* instead
         vim.cmd("autocmd! TermOpen term://*toggleterm#* lua set_terminal_keymaps()")
+
+        local Terminal = require("toggleterm.terminal").Terminal
+
+        -- Create terminals for different modes
+        local horizontal_term = Terminal:new({ direction = "horizontal" })
+        local vertical_term = Terminal:new({ direction = "vertical" })
+        local float_term = Terminal:new({ direction = "float" })
+
+        function horizontal_term_toggle()
+          horizontal_term:toggle()
+        end
+        function vertical_term_toggle()
+          vertical_term:toggle()
+        end
+        function float_term_toggle()
+          float_term:toggle()
+        end
+
+        -- Key mappings for opening different terminals
+        vim.keymap.set({"n", "v", "i", "t"}, "<M-1>", "<cmd>lua horizontal_term_toggle()<CR>", { noremap = true, silent = true })
+        vim.keymap.set({"n", "v", "i", "t"}, "<M-2>", "<cmd>lua vertical_term_toggle()<CR>", { noremap = true, silent = true })
+        vim.keymap.set({"n", "v", "i", "t"}, "<M-3>", "<cmd>lua float_term_toggle()<CR>", { noremap = true, silent = true })
+
+
 	end,
 }
