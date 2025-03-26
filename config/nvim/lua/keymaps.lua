@@ -13,6 +13,7 @@ vim.keymap.set("n", "<C-h>", "<C-w>h", opts)
 vim.keymap.set("n", "<C-j>", "<C-w>j", opts)
 vim.keymap.set("n", "<C-k>", "<C-w>k", opts)
 vim.keymap.set("n", "<C-l>", "<C-w>l", opts)
+vim.keymap.set({"n", "v", "i", "t"}, "<leader>qq", ":wqa<CR>", opts)
 
 -- Resize with arrows
 -- delta: 2 lines
@@ -22,6 +23,17 @@ vim.keymap.set("n", "<C-Down>", ":resize +2<CR>", opts)
 vim.keymap.set("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 
 vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+
+
+-- Better Editting
+vim.keymap.set({"n", "i", "x"}, "<leader>w", ":write<CR>", opts)
+vim.keymap.set("n", "<leader>fd", "_d", opts)
+vim.keymap.set("n", "<leader>fd", "_d", opts)
+vim.keymap.set("n", "<leader>fp", "_d", opts)
+
+-- Centering Search Resutls
+vim.keymap.set({"n"}, "n", "nzz", opts)
+vim.keymap.set({"n"}, "p", "pzz", opts)
 
 -- For nvim-tree.lua
 vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
@@ -75,4 +87,3 @@ vim.keymap.set({"n", "v", "i", "t"}, "<M-3>", "<cmd>lua float_term_toggle()<CR>"
 
 -- For Dashboard
 vim.keymap.set("n", "<leader>d", "<cmd>Dashboard<CR>", { noremap = true, silent = true })
-
