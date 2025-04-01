@@ -1,7 +1,7 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
-	config = function()
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
         local is_ok, configs = pcall(require, "nvim-treesitter.configs")
         if not is_ok then
             return
@@ -31,8 +31,9 @@ return {
                 "gomod",
                 "go",
                 "comment", -- for tags like TODO:, FIXME(user)
-                "diff", -- git diff
+                "diff",    -- git diff
                 "markdown_inline",
+                "bash",
             },
             -- Install parsers synchronously (only applied to `ensure_installed`)
             sync_install = false,
@@ -113,5 +114,5 @@ return {
                 vim.opt.foldenable = false
             end,
         })
-	end,
+    end,
 }

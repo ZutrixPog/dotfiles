@@ -10,7 +10,7 @@ return {
         lualine.setup({
             options = {
                 icons_enabled = true,
-                theme = "everforest",
+                theme = "gruvbox-material",
                 component_separators = { left = "", right = "" },
                 section_separators = { left = "", right = "" },
                 disabled_filetypes = {
@@ -51,8 +51,8 @@ return {
                 lualine_y = {},
                 lualine_z = {},
             },
-            tabline = {
-                lualine_a = {
+            --[===[tabline = {
+                lualine_c = {
                     {
                         "filename",
                         file_status = true, -- Displays file status (read-only status, modified status)
@@ -66,10 +66,19 @@ return {
                         shorting_target = 40, -- Shortens path to leave 40 spaces in the window
                     },
                 },
+            },]===] --
+            winbar = {
+                lualine_c = {
+                    {
+                        "navic",
+                        color_correction = nil,
+                        navic_opts = nil
+                    }
+                }
             },
-            winbar = {},
+            --winbar = {},
             inactive_winbar = {},
             extensions = {},
         })
-	end,
+    end,
 }

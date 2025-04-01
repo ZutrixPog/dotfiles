@@ -1,36 +1,48 @@
+# color scheme
+#import = ["gruvbox.toml",]
+
 shell = "/usr/bin/tmux"
 [window]
 dimensions = { columns = 135, lines = 35 }
 title = "geez"
 
-# Default colors
+[font]
+normal = { family = "ComicShannsMono Nerd Font", style = "Regular" }
+size = 12
+
 [colors.primary]
-background = '#363537'
-foreground = '#fff1f3'
+background = '#32302f'
+foreground = '#d4be98'
 
 # Normal colors
 [colors.normal]
-black   = '#2c2525'
-red     = '#fd6883'
-green   = '#adda78'
-yellow  = '#f9cc6c'
-blue    = '#f38d70'
+black   = '#32302f'
+red     = '#ea6962'
+green   = '#a9b665'
+yellow  = '#d8a657'
+blue    = '#e78a4e'
 magenta = '#a8a9eb'
-cyan    = '#85dacc'
+cyan    = '#7daea3'
 white   = '#fff1f3'
 
 # Bright colors
 [colors.bright]
-black   = '#72696a'
-red     = '#fd6883'
-green   = '#adda78'
-yellow  = '#f9cc6c'
-blue    = '#f38d70'
+black   = '#32302f'
+red     = '#ea6962'
+green   = '#a9b665'
+yellow  = '#d8a657'
+blue    = '#e78a4e'
 magenta = '#a8a9eb'
-cyan    = '#85dacc'
+cyan    = '#7daea3'
 white   = '#fff1f3'
 
 [colors.dim]
-red     = '#d16f8c'
-green   = '#7bd88f'
-yellow  = '#fd9353'
+black   = '#32302f'
+red     = '#ea6962'
+green   = '#a9b665'
+yellow  = '#d8a657'
+blue    = '#e78a4e'
+magenta = '#a8a9eb'
+cyan    = '#7daea3'
+white   = '#fff1f3'
+

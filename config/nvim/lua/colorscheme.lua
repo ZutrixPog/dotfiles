@@ -1,7 +1,8 @@
-local colorscheme = 'everforest'
+local colorscheme = 'gruvbox-material'
 
-vim.g.everforest_enable_italic = true
-vim.g.everforest_background = "hard"
+vim.g.gruvbox_material_background = 'soft'
+vim.g.gruvbox_material_enable_italic = '1'
+vim.g.gruvbox_material_cursor = 'orange'
 
 local is_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
 if not is_ok then
