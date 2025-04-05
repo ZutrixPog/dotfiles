@@ -9,8 +9,6 @@ configuration {
     display-window: "󱂬  window:";
     display-combi:  "󰕘  combi:";
     display-filebrowser: "󰉋 filebrowser:";
-
-    dpi: 192;
 }
 
 @theme "gruvbox-material"

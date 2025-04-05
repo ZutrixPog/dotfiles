@@ -1,4 +1,4 @@
-Xft.dpi: 192
+# Xft.dpi: 192
 Xcursor.theme: ArchCursorTheme
 ! also set with lxappearance and double check the following:
 ! /usr/share/icons/default/index.theme

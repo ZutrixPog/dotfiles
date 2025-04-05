@@ -109,7 +109,7 @@ install_tools() {
     # Common packages
     local common_packages=(
         git curl wget tmux zsh rofi i3 i3blocks
-        alacritty picom python3-pip python3 xclip
+        picom python3-pip python3 xclip
     )
 
     # Distro-specific packages

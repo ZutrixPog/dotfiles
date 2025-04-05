@@ -222,9 +222,13 @@ exec_always feh --bg-fill ~/.config/wallpaper/damavand-sunrise.jpg
 
 # Shortcut for Lockscreen
 bindsym $mod+semicolon exec bash /home/$USER/.config/scripts/lock
+# autolock screen
+exec xautolock -time 5 -locker "bash /home/$USER/.config/scripts/lock"
 
 # Allocate applications to workspaces
 for_window [class="firefox"] move to workspace $ws2
+for_window [class="Mattermost"] move to workspace $ws6
+for_window [class="v2rayN"] move to workspace $ws6
 
 # default gaps
 gaps inner 10
