@@ -68,6 +68,14 @@ return {
                 },
             },]===] --
             winbar = {
+                lualine_b = {
+                    {
+                        "filename",
+                        file_status = true,   -- Displays file status (read-only status, modified status)
+                        path = 1,
+                        shorting_target = 40, -- Shortens path to leave 40 spaces in the window
+                    },
+                },
                 lualine_c = {
                     {
                         "navic",
