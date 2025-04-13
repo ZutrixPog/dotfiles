@@ -12,6 +12,7 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 export PATH=/home/erfan/.local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/usr/bin/flutter/bin
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,

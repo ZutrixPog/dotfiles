@@ -1,9 +1,9 @@
 return {
-	"nvim-tree/nvim-tree.lua",
-	dependencies = {
-		"nvim-tree/nvim-web-devicons", -- optional, for file icons
-	},
-	config = function()
+    "nvim-tree/nvim-tree.lua",
+    dependencies = {
+        "nvim-tree/nvim-web-devicons", -- optional, for file icons
+    },
+    config = function()
         local is_ok, nvim_tree = pcall(require, "nvim-tree")
         if not is_ok then
             return
@@ -118,13 +118,13 @@ return {
             },
 
             filters = {
-
-                dotfiles = true,
+                dotfiles = false,
+                git_ignored = false,
             },
             diagnostics = {
 
                 enable = true,
             },
         })
-	end,
+    end,
 }
