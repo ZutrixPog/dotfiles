@@ -110,7 +110,7 @@ install_tools() {
     local common_packages=(
         git curl wget tmux zsh rofi i3 i3blocks
         alacritty picom feh python3-pip python3 xclip
-        xautolock
+        xautolock ffmpeg
     )
 
     # Distro-specific packages

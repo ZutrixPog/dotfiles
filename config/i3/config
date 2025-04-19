@@ -50,6 +50,9 @@ bindsym $mod+d exec --no-startup-id rofi -show drun
 # start filebrowser (rofi)
 bindsym $mod+g exec --no-startup-id rofi -show filebrowser
 
+# record screen
+bindsym $mod+Shift+s exec bash ~/.dotfiles/config/scripts/screencast
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down

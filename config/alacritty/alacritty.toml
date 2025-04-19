@@ -1,7 +1,7 @@
 # color scheme
 #import = ["gruvbox.toml",]
 
-shell = "/usr/bin/tmux"
+shell = "/usr/bin/zsh"
 [window]
 dimensions = { columns = 135, lines = 35 }
 title = "geez"
