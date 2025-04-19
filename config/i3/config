@@ -53,6 +53,13 @@ bindsym $mod+g exec --no-startup-id rofi -show filebrowser
 # record screen
 bindsym $mod+Shift+s exec bash ~/.dotfiles/config/scripts/screencast
 
+# screenshot
+set $screenshot bash $HOME/.dotfiles/config/scripts/screenshot
+
+bindsym Print exec --no-startup-id $screenshot full
+bindsym Shift+Print exec --no-startup-id $screenshot select
+bindsym $mod+Print exec --no-startup-id $screenshot window
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down

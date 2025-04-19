@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# Use the current timestamp as the unique filename of the screenshot.
+FILE_DIR="/home/$USER/Pictures/Screenshots"
+FILE_PATH="${FILE_DIR}/screenshot-$(date -u +'%Y%m%d-%H%M%SZ').png"
+
+mkdir -p $FILE_DIR
+
+main() {
+    case $1 in
+        full) maim --format=png | tee "$FILE_PATH" | xclip -selection clipboard -t image/png ;;
+        select) maim --select | tee "$FILE_PATH" | xclip -selection clipboard -t image/png ;;
+        window) maim --window $(xdotool getactivewindow) | tee "$FILE_PATH" | xclip -selection clipboard -t image/png
+    esac
+}
+
+main "$@"
