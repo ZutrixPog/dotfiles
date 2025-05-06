@@ -3,6 +3,7 @@
 
 shell = "/usr/bin/zsh"
 [window]
+padding={ x = 5 }
 dimensions = { columns = 135, lines = 35 }
 title = "geez"
 
