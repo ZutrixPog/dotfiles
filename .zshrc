@@ -14,6 +14,11 @@ export PATH=/home/erfan/.local/bin:$PATH
 export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/usr/bin/flutter/bin
 export PATH=$PATH:$HOME/.local/zsh-linux-x86_64/bin
+export PATH=$PATH:$HOME/flutter/bin
+export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin
+export ANDROID_HOME=$HOME/Android/Sdk
+export ANDROID_SDK_ROOT=$HOME/Android/Sdk
+export PATH=${PATH}:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,

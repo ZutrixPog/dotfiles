@@ -3,7 +3,7 @@ return {
     config = function()
         require('Comment').setup()
 
-        vim.keymap.set("n", "<leader>/", "gcc")
-        vim.keymap.set("v", "<leader>/", "gbc")
+        vim.keymap.set('n', '<leader>c', 'gcc', { remap = true })
+        vim.keymap.set('x', '<leader>c', 'gc', { remap = true })
     end
 }
