@@ -1,0 +1,53 @@
+[global]
+    origin = top-right
+    offset = 20x20
+    width = 450
+    max_icon_size = 64
+    stack_duplicates = true
+    alignment = left
+    notification_limit = 5
+
+    background = "#7c6f64"
+    foreground = "#d4be98"
+    frame_color = "#7c6f64"
+
+    # Font style
+    font = Monospace 10
+
+    # Layout and spacing
+    padding = 12
+    horizontal_padding = 12
+    frame_width = 0
+    separator_height = 2
+    separator_color = "frame"
+    line_height = 4
+
+    transparency = 10
+
+    indicate_hidden = yes
+    show_age_threshold = 60
+
+    follow = mouse
+    shrink = no
+    word_wrap = yes
+    ignore_newline = no
+    sticky_history = yes
+
+[urgency_low]
+    background = "#7c6f64"
+    foreground = "#d4be98"
+    frame_color = "#7c6f64"
+    timeout = 4
+
+[urgency_normal]
+    background = "#7c6f64"
+    foreground = "#d4be98"
+    frame_color = "#7c6f64"
+    timeout = 6
+
+[urgency_critical]
+    background = "#7c6f64"
+    foreground = "#d4be98"
+    frame_color = "#7c6f64"
+    timeout = 0
+

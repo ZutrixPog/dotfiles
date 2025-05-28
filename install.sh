@@ -60,6 +60,7 @@ backup_existing_configs() {
         "$CONFIG_DIR/i3"
         "$CONFIG_DIR/alacritty"
         "$CONFIG_DIR/picom"
+        "$CONFIG_DIR/dunst"
         "$CONFIG_DIR/rofi"
         "$CONFIG_DIR/scripts"
         "$CONFIG_DIR/wallpaper"
@@ -98,6 +99,7 @@ install_packages() {
 # - tmux
 # - rofi
 # - picom
+# - dunst
 # - nvim
 # - i3
 # - alacritty
@@ -109,7 +111,7 @@ install_tools() {
     # Common packages
     local common_packages=(
         git curl wget tmux zsh rofi i3 i3blocks
-        alacritty picom feh python3-pip python3 xclip
+        alacritty picom dunst feh python3-pip python3 xclip
         xautolock ffmpeg maim xdotool xclip
     )
 
@@ -204,7 +206,7 @@ install_dotfiles() {
     mkdir -p "$CONFIG_DIR"
 
     # Install config directories
-    local config_dirs=("nvim" "i3" "picom" "alacritty" "rofi" "scripts" "wallpaper")
+    local config_dirs=("nvim" "i3" "picom" "dunst" "alacritty" "rofi" "scripts" "wallpaper")
     for dir in "${config_dirs[@]}"; do
         if [[ -d "$DOTFILES_DIR/config/$dir" ]]; then
             rm -rf "$CONFIG_DIR/$dir"
