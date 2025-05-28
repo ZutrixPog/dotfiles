@@ -1,5 +1,5 @@
 [global]
-    origin = top-right
+    origin = top-center
     offset = 20x20
     width = 450
     max_icon_size = 64
