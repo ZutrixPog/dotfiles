@@ -210,7 +210,7 @@ client.unfocused        $bg        $bg          $fg       $bg
 client.focused_inactive $darkgray  $bg          $gray       $bg
 client.urgent           $purple    $bg          $darkgray   $bg
 
-exec_always --no-startup-id ./config/polybar/launch.sh --grayblocks
+exec_always --no-startup-id $HOME/config/polybar/launch.sh --grayblocks
 # bar {
 #     position bottom
 #     status_command i3blocks -c ~/.config/i3/i3blocks.conf
