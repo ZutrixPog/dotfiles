@@ -144,7 +144,7 @@ install_tools() {
     # fi
 
     # Install pip packages
-    pip3 install --user pynvim
+    pip3 install --break-system-packages --user pynvim
 }
 
 install_neovim_latest() {

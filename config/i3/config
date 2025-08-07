@@ -210,23 +210,23 @@ client.unfocused        $bg        $bg          $fg       $bg
 client.focused_inactive $darkgray  $bg          $gray       $bg
 client.urgent           $purple    $bg          $darkgray   $bg
 
-exec --no-startup-id ./config/polybar/launch.sh --grayblocks
-bar {
-    position bottom
-    status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    colors {
-        # bar background color
-        background $bg-dim
-        # text color used for blocks that do not have a color specified.
-        statusline $yellow
-        # workspaces section
-        #                    border    backgr.    text
-        focused_workspace    $yellow   $yellow    $text
-        inactive_workspace   $bg       $bg        $yellow
-        active_workspace     $bg       $bg        $yellow
-        urgent_workspace     $red $red $bg
-    }
-}
+exec_always --no-startup-id ./config/polybar/launch.sh --grayblocks
+# bar {
+#     position bottom
+#     status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#     colors {
+#         # bar background color
+#         background $bg-dim
+#         # text color used for blocks that do not have a color specified.
+#         statusline $yellow
+#         # workspaces section
+#         #                    border    backgr.    text
+#         focused_workspace    $yellow   $yellow    $text
+#         inactive_workspace   $bg       $bg        $yellow
+#         active_workspace     $bg       $bg        $yellow
+#         urgent_workspace     $red $red $bg
+#     }
+# }
 
 # Display Wallpaper
 exec_always feh --bg-fill ~/.config/wallpaper/damavand-sunrise.jpg
