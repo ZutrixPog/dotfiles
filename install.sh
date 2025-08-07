@@ -112,7 +112,7 @@ install_tools() {
     local common_packages=(
         git curl wget tmux zsh rofi i3 i3blocks
         alacritty picom dunst feh python3-pip python3 xclip
-        xautolock ffmpeg maim xdotool xclip
+        xautolock ffmpeg maim xdotool xclip blueman polybar
     )
 
     # Distro-specific packages
@@ -206,7 +206,7 @@ install_dotfiles() {
     mkdir -p "$CONFIG_DIR"
 
     # Install config directories
-    local config_dirs=("nvim" "i3" "picom" "dunst" "alacritty" "rofi" "scripts" "wallpaper")
+    local config_dirs=("nvim" "i3" "picom" "dunst" "alacritty" "rofi" "scripts" "wallpaper", "polybar")
     for dir in "${config_dirs[@]}"; do
         if [[ -d "$DOTFILES_DIR/config/$dir" ]]; then
             rm -rf "$CONFIG_DIR/$dir"

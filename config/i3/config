@@ -45,10 +45,10 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # start dmenu (rofi)
-bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id bash $HOME/.config/polybar/grayblocks/scripts/launcher.sh
 
-# start filebrowser (rofi)
-bindsym $mod+g exec --no-startup-id rofi -show filebrowser
+# start powermenu (rofi)
+bindsym $mod+g exec --no-startup-id bash $HOME/.config/polybar/grayblocks/scripts/powermenu.sh
 
 # record screen
 bindsym $mod+Shift+s exec bash ~/.dotfiles/config/scripts/screencast
@@ -210,6 +210,7 @@ client.unfocused        $bg        $bg          $fg       $bg
 client.focused_inactive $darkgray  $bg          $gray       $bg
 client.urgent           $purple    $bg          $darkgray   $bg
 
+exec --no-startup-id ./config/polybar/launch.sh --grayblocks
 bar {
     position bottom
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
@@ -233,7 +234,7 @@ exec_always feh --bg-fill ~/.config/wallpaper/damavand-sunrise.jpg
 # Shortcut for Lockscreen
 bindsym $mod+semicolon exec bash /home/$USER/.config/scripts/lock
 # autolock screen
-exec xautolock -time 5 -locker "bash /home/$USER/.config/scripts/lock"
+exec xautolock -time 1 -locker "pgrep -x i3lock > /dev/null || bash /home/$USER/.config/scripts/lock"
 
 # Allocate applications to workspaces
 for_window [class="firefox"] move to workspace $ws2
@@ -243,6 +244,7 @@ for_window [class="v2rayN"] move to workspace $ws6
 # default gaps
 gaps inner 10
 gaps outer 3
+gaps top 29
 
 # gaps
 set $mode_gaps Gaps: (o)uter, (i)nner, (h)orizontal, (v)ertical, (t)op, (r)ight, (b)ottom, (l)eft
