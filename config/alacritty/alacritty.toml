@@ -1,11 +1,11 @@
 # color scheme
-#import = ["gruvbox.toml",]
 
-shell = "/usr/bin/zsh"
+terminal.shell = "zsh"
 [window]
 padding={ x = 5 }
 dimensions = { columns = 135, lines = 35 }
 title = "geez"
+decorations_theme_variant = "Dark"
 
 [font]
 normal = { family = "ComicShannsMono Nerd Font", style = "Regular" }

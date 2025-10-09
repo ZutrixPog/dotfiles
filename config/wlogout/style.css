@@ -1,0 +1,61 @@
+* {
+    background-image: none;
+    font-size: 14px;
+}
+
+window {
+    background-image: image(url("/tmp/wlogout-bg-blur.png"));
+    background-size: cover;
+    background-position: center;
+}
+
+button {
+    color: #ebdbb2; /* Gruvbox light1 */
+    background-color: rgba(60, 56, 54, 0.7); /* Gruvbox dark0_hard */
+    outline: none;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 22%;
+    box-shadow: none;
+    text-shadow: none;
+    margin: 0;          /* remove gaps */
+    border-radius: 0;   /* default square */
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgba(102, 92, 84, 0.85); /* Gruvbox dark2 */
+}
+
+button:focus {
+    background-color: rgba(80, 73, 69, 0.8); /* Gruvbox dark1 */
+}
+
+#lock {
+    background-image: image(url("/home/erfan/.config/wlogout/icons/lock.png"));
+    border-radius: 12px 0 0 0; /* left rounded */
+}
+
+#logout {
+    background-image: image(url("/home/erfan/.config/wlogout/icons/logout.png"));
+    border-radius: 0 0 0 12px; 
+}
+
+#suspend {
+    background-image: image(url("/home/erfan/.config/wlogout/icons/suspend.png"));
+}
+
+#shutdown {
+    background-image: image(url("/home/erfan/.config/wlogout/icons/shutdown.png"));
+}
+
+#hibernate {
+    background-image: image(url("/home/erfan/.config/wlogout/icons/hibernate.png"));
+    border-radius: 0 12px 0 0;
+}
+
+#reboot {
+    background-image: image(url("/home/erfan/.config/wlogout/icons/reboot.png"));
+    border-radius: 0 0 12px 0; /* right rounded */
+}

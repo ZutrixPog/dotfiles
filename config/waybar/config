@@ -1,0 +1,179 @@
+// -*- mode: jsonc -*-
+[{
+    "output": ["eDP-1", "eDP-2", "HDMI-A-1"],
+    "height": 24,
+    "spacing": 4,
+
+    "modules-left": [
+        "niri/workspaces",
+        "cava",
+        "cpu",
+        "memory",
+        "network"
+    ],
+    "modules-center": [
+        "niri/window"
+    ],
+    "modules-right": [
+        "mpris",
+        "wireplumber",
+        "backlight",
+        "clock",
+        "custom/layout",
+        "battery",
+        "tray",
+        "custom/power"
+    ],
+
+    "niri/workspaces": {
+        "all-outputs": true,
+        "format": "{index}",
+        "disable-scroll": false
+    },
+    "niri/window": {
+        "format": "{title}",
+        "max-length": 40,
+        "all-outputs": true
+    },
+    "cava": {
+        "framerate": 30,
+        "autosens": 1,
+        "bars": 14,
+        "lower_cutoff_freq": 50,
+        "higher_cutoff_freq": 10000,
+        "method": "pipewire",
+        "source": "auto",
+        "stereo": true,
+        "bar_delimiter": 0,
+        "noise_reduction": 0.77,
+        "input_delay": 2,
+        "hide_on_silence": true,
+        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ]
+    },
+    "mpris": {
+        "format": " {status_icon} {dynamic}",
+        "interval": 1,
+        "dynamic-len": 40,
+        "status-icons": {
+            "playing": "▶",
+            "paused": "⏸",
+            "stopped": ""
+        },
+        "dynamic-order": ["title", "artist"],
+        "ignored-players": ["firefox"]
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "icon-size": 14,
+        "spacing": 10
+    },
+    "load": {
+        "format": " {}"
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
+    },
+    "memory": {
+        "format": "{}% "
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-full": "{icon} {capacity}%",
+        "format-charging": " {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "wireplumber": {
+        "scroll-step": 3,
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}% ",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    },
+    "network": {
+        "interface": "wlp3s0",
+        "format-wifi": "  {essid} ↑{bandwidthUpBits} ↓{bandwidthDownBits}",
+        "format-ethernet": "󰈀 {ifname} ↑{bandwidthUpBits} ↓{bandwidthDownBits}",
+        "format-disconnected": "󰖪",
+        "tooltip-format": "{ifname} ({ipaddr})\nUp: {bandwidthUpBits}\nDown: {bandwidthDownBits}",
+        "interval": 2,
+        "on-click": "alacritty -e nmtui"
+    },
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": true,
+        "tooltip-format": "Power Menu",
+        "on-click": "wlogout -b 4 -T 400 -B 400"
+    },
+    "custom/layout": {
+        "exec": "niri msg keyboard-layouts | grep '*' | awk '{print $3}'",
+        "interval": 1,
+        "format": "{}",
+        "tooltip": false
+    }
+},{
+    "output": ["HDMI-A-2"],
+    "height": 24,
+    "spacing": 4,
+
+    "modules-left": [
+        "niri/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "niri/window"
+    ],
+
+    "niri/workspaces": {
+        "all-outputs": true,
+        "format": "{index}",
+        "disable-scroll": false
+    },
+    "niri/window": {
+        "format": "{title}",
+        "max-length": 40,
+        "all-outputs": true
+    },
+    "clock": {
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    }
+}]
+

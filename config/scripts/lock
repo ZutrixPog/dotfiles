@@ -1,37 +1,36 @@
 #!/bin/sh
 
-BLANK='#00000000'
-CLEAR='#ffffff22'
-DEFAULT='#e78a4e'
-TEXT='#d4be98'
-INPUT='#d4be98'
-WRONG='#ea6962'
-VERIFYING='#a9b665'
+# Gruvbox color palette (no #)
+BLANK=00000000
+CLEAR=ffffff22
+DEFAULT=e78a4e
+TEXT=d4be98
+INPUT=d4be98
+WRONG=ea6962
+VERIFYING=a9b665
 
-i3lock \
---insidever-color=$CLEAR     \
---ringver-color=$VERIFYING   \
-\
---insidewrong-color=$CLEAR   \
---ringwrong-color=$WRONG     \
-\
---inside-color=$BLANK        \
---ring-color=$DEFAULT        \
---line-color=$BLANK          \
---separator-color=$DEFAULT   \
-\
---verif-color=$TEXT          \
---wrong-color=$TEXT          \
---time-color=$TEXT           \
---date-color=$TEXT           \
---layout-color=$TEXT         \
---keyhl-color=$INPUT         \
---bshl-color=$INPUT          \
-\
---screen 1                   \
---blur 8                     \
---clock                      \
---indicator                  \
---time-str="%H:%M:%S"        \
---date-str="%A, %Y-%m-%d"       \
---keylayout 1                \
+swaylock \
+  --screenshots \
+  --effect-blur=8x5 \
+  \
+  --inside-ver-color=$CLEAR \
+  --ring-ver-color=$VERIFYING \
+  \
+  --inside-wrong-color=$CLEAR \
+  --ring-wrong-color=$WRONG \
+  \
+  --inside-color=$BLANK \
+  --ring-color=$DEFAULT \
+  --line-color=$BLANK \
+  --separator-color=$DEFAULT \
+  \
+  --text-color=$TEXT \
+  --text-ver-color=$TEXT \
+  --text-wrong-color=$TEXT \
+  --bs-hl-color=$INPUT \
+  --key-hl-color=$INPUT \
+  \
+  --clock \
+  --indicator \
+  --timestr="%H:%M:%S" \
+  --datestr="%A, %Y-%m-%d"
