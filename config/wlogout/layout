@@ -1,20 +1,20 @@
 {
     "label" : "lock",
-    "action" : "swaylock",
+    "action" : "/home/erfan/.config/scripts/lock",
     "text" : "",
     "keybind" : "l"
 }
 
 {
     "label" : "logout",
-    "action" : "hyprctl dispatch exit 0",
+    "action" : "pkill -KILL -u $USER",
     "text" : "",
     "keybind" : "e"
 }
 
 {
     "label" : "suspend",
-    "action" : "swaylock -f && systemctl suspend",
+    "action" : "systemctl suspend",
     "text" : "",
     "keybind" : "u"
 }
@@ -28,7 +28,7 @@
 
 {
     "label" : "hibernate",
-    "action" : "systemctl hibernate",
+    "action" : "/home/erfan/.config/scripts/lock && systemctl hibernate",
     "text" : "",
     "keybind" : "h"
 }
