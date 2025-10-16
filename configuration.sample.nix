@@ -88,6 +88,14 @@
     packages = with pkgs; [];
   };
 
+  # systemd services
+  systemd.services.v2raya = {
+    enable = true;
+    serviceConfig = {
+       ExecStart = "/home/erfan/.nix-profile/bin/v2rayA";
+    };
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

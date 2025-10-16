@@ -8,7 +8,7 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    git curl wget unzip
+    git curl wget unzip inetutils
     tmux
     alacritty
     waybar
@@ -32,7 +32,7 @@
     xfce.tumbler
 
     pkgs.nerd-fonts.comic-shanns-mono
-    v2rayn
+    v2ray v2raya
   ];
 
   programs.zsh = {
