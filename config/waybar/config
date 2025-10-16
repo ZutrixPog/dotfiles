@@ -1,6 +1,6 @@
 // -*- mode: jsonc -*-
 [{
-    "output": ["eDP-1", "eDP-2", "HDMI-A-1"],
+    "output": ["eDP-1", "eDP-2", "HDMI-A-1", "DP-1"],
     "height": 24,
     "spacing": 4,
 
@@ -126,7 +126,7 @@
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     },
     "network": {
-        "interface": "wlp3s0",
+        "interface": "wlp0s20f3",
         "format-wifi": "  {essid} ↑{bandwidthUpBits} ↓{bandwidthDownBits}",
         "format-ethernet": "󰈀 {ifname} ↑{bandwidthUpBits} ↓{bandwidthDownBits}",
         "format-disconnected": "󰖪",

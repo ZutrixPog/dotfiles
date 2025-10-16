@@ -19,11 +19,12 @@
     swaybg
     mako libnotify
     swaylock-effects
-    blueman
+    bluez blueman
     ffmpeg
     gcc
     go
     imagemagick
+    rustup
 
     xfce.thunar
     xfce.thunar-volman
