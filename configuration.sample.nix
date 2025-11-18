@@ -79,21 +79,13 @@
     pulse.enable = true;
     wireplumber.enable = true;
   };
-  
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.erfan = {
     isNormalUser = true;
     description = "Erfan";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
-  };
-
-  # systemd services
-  systemd.services.v2raya = {
-    enable = true;
-    serviceConfig = {
-       ExecStart = "/home/erfan/.nix-profile/bin/v2rayA";
-    };
   };
 
   # Allow unfree packages

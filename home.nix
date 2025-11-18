@@ -9,7 +9,7 @@
 
   home.packages = with pkgs; [
     git curl wget unzip inetutils
-    tmux
+    zip tmux android-tools
     alacritty
     waybar
     wofi
@@ -24,7 +24,8 @@
     gcc
     go
     imagemagick
-    rustup
+    rustup just
+    ripgrep
 
     xfce.thunar
     xfce.thunar-volman
@@ -32,7 +33,6 @@
     xfce.tumbler
 
     pkgs.nerd-fonts.comic-shanns-mono
-    v2ray v2raya
   ];
 
   programs.zsh = {
