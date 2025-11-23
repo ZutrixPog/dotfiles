@@ -25,7 +25,7 @@
     go
     imagemagick
     rustup just
-    ripgrep
+    ripgrep mpv
 
     xfce.thunar
     xfce.thunar-volman
