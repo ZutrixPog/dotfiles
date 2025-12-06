@@ -126,7 +126,7 @@
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
     },
     "network": {
-        "interface": "wlp0s20f3",
+        "interface": "enp5s0",
         "format-wifi": "  {essid} ↑{bandwidthUpBits} ↓{bandwidthDownBits}",
         "format-ethernet": "󰈀 {ifname} ↑{bandwidthUpBits} ↓{bandwidthDownBits}",
         "format-disconnected": "󰖪",

@@ -84,12 +84,13 @@
   users.users.erfan = {
     isNormalUser = true;
     description = "Erfan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  virtualization.docker.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -98,6 +99,7 @@
     curl
     git
 
+    xwayland-satellite
     libinput
     firefox
     home-manager

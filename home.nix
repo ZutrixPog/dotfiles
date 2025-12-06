@@ -21,11 +21,12 @@
     swaylock-effects
     bluez blueman
     ffmpeg
-    gcc
+    gcc gnumake
     go
     imagemagick
     rustup just
     ripgrep mpv
+    nekoray gimp
 
     xfce.thunar
     xfce.thunar-volman
@@ -39,9 +40,14 @@
     enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
     oh-my-zsh.enable = true;
 
     oh-my-zsh.theme = "robbyrussell";
+
+    initContent = ''
+      export PATH="$PATH:$HOME/.local/bin:${PATH:-/run/current-system/sw/bin}"
+    '';
   };
 
   programs.neovim = {
