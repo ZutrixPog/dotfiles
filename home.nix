@@ -46,7 +46,7 @@
     oh-my-zsh.theme = "robbyrussell";
 
     initContent = ''
-      export PATH="$PATH:$HOME/.local/bin:${PATH:-/run/current-system/sw/bin}"
+      export PATH="$PATH:$HOME/.local/bin:$HOME/.cargo/bin:${PATH:-/run/current-system/sw/bin}"
     '';
   };
 
