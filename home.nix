@@ -27,6 +27,7 @@
     rustup just
     ripgrep mpv
     nekoray gimp
+    zip
 
     xfce.thunar
     xfce.thunar-volman
@@ -39,7 +40,7 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    syntaxHighlighting.enable = true;
+    # syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
     oh-my-zsh.enable = true;
 

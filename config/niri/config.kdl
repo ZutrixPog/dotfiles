@@ -287,7 +287,7 @@ layer-rule {
     place-within-backdrop true
 }
 
-spawn-at-startup "swaybg" "-i" "/home/erfan/.config/wallpaper/damavand-painting.png" "-m" "stretch"
+spawn-at-startup "swaybg" "-i" "/home/erfan/.config/wallpaper/hormuz.jpg" "-m" "stretch"
 
 spawn-at-startup "/home/erfan/.config/scripts/cachebgblur.sh"
 
@@ -647,5 +647,3 @@ binds {
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 }
-
-spawn-at-startup "swaybg -i ~/.config/wallpaper/damavand.jpg"
