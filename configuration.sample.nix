@@ -24,6 +24,12 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
+
   security.sudo = {
     enable = true;
     extraRules = [
