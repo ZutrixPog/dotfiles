@@ -21,5 +21,5 @@ layer=overlay
 # ─── Behavior ───────────────────────────────────────────────
 group-by=app-name
 sort=-time
-ignore-timeout=1
+# ignore-timeout=1
 actions=1

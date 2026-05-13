@@ -24,6 +24,29 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  security.sudo = {
+    enable = true;
+    extraRules = [
+      {
+        users = [ "erfan" ];
+        commands = [
+          {
+            command = "/run/wrappers/bin/ip";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "/run/current-system/sw/bin/ip";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "/run/current-system/sw/bin/iptables";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+      }
+    ];
+  };
+
   # Set your time zone.
   time.timeZone = "Asia/Tehran";
 
@@ -88,6 +111,22 @@
     packages = with pkgs; [];
   };
 
+  services.openssh = {
+    enable = true;
+    ports = [ 5432 ];
+    settings = {
+      PasswordAuthentication = true;
+      KbdInteractiveAuthentication = true;
+      PermitRootLogin = "no";
+      AllowUsers = [ "erfan" ];
+    };
+  };
+
+  services.ollama = {
+    enable = true;
+    acceleration = true;
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   virtualization.docker.enable = true;
@@ -101,9 +140,38 @@
 
     xwayland-satellite
     libinput
-    firefox
     home-manager
+    brave jupyter
+    parted v2rayn
+    qemu nmap ntfs3g
   ];
+
+  systemd.user.services.stand-reminder = {
+    description = "Hourly reminder to stand up and walk";
+    after = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
+
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = pkgs.writeShellScript "stand-reminder" ''
+        export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
+
+        while true; do
+          sleep 3600
+          ${pkgs.libnotify}/bin/notify-send \
+            -u critical \
+            -t 900000 \
+            -i "preferences-system-time" \
+            "Time to Move!" \
+            "Stand up and walk for a few minutes 💪"
+        done
+      '';
+      Restart = "always";
+      RestartSec = 30;
+      Environment = "DISPLAY=:0";
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -130,6 +198,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 
 }
