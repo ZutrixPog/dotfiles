@@ -133,7 +133,7 @@ in
 
   services.ollama = {
     enable = true;
-    acceleration = true;
+    package = pkgs.ollama-cuda;
   };
 
   # Allow unfree packages
