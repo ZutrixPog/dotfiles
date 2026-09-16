@@ -22,7 +22,6 @@
     bluez blueman
     ffmpeg
     gcc gnumake
-    go
     imagemagick
     rustup just
     ripgrep mpv
@@ -33,6 +32,7 @@
     xfce.thunar-volman
     xfce.thunar-archive-plugin
     xfce.tumbler
+    loupe
 
     pkgs.nerd-fonts.comic-shanns-mono
   ];
