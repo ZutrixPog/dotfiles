@@ -7,6 +7,7 @@ builtin = "Gruvbox"
 font_family = "ComicShannsMono Nerd Font"
 time_format = "{:%H:%M}"
 date_format = "%A, %x"
+panel_anchor_bar = "main"
 
 [shell.screenshot]
 save_to_file = true
@@ -16,7 +17,7 @@ freeze_screen = true
 annotate = true
 
 [bar]
-order = ["main"]
+order = ["main", "bottom"]
 
 [bar.main]
 position = "top"
@@ -26,9 +27,24 @@ radius = 10
 margin_ends = 300
 widget_spacing = 16
 padding = 18
-start  = ["launcher", "workspaces", "network", "cpu", "ram", "net_rx", "net_tx"]
-center = ["audio_visualizer", "active_window", "notifications"]
-end    = ["media", "tray", "volume", "brightness", "keyboard_layout", "clock", "battery", "control-center", "session"]
+start  = ["launcher", "workspaces", "network", "media"]
+center = ["active_window", "notifications"]
+end    = ["tray", "volume", "brightness", "keyboard_layout", "clock", "battery", "control-center", "session"]
+
+[bar.bottom]
+position           = "bottom"
+layer              = "overlay"
+reserve_space      = false
+thickness          = 26
+background_opacity = 0.90
+compositor_blur    = true
+radius             = 12
+margin_ends        = 1000
+padding            = 14
+widget_spacing     = 12
+start = []
+center = ["cpu", "ram", "audio_visualizer", "net_rx", "net_tx"]
+end = []
 
 [widget.cpu]
 type = "sysmon"
@@ -91,7 +107,7 @@ effects = true
 address = "Tehran, Iran"
 
 [desktop_widgets]
-enabled = true
+enabled = false
 schema_version = 2
 widget_order = ["weather_main", "sysmon_cpu", "sysmon_ram", "sysmon_net", "media_main", "audio_main"]
 
