@@ -11,14 +11,8 @@
     git curl wget unzip inetutils
     zip tmux android-tools
     alacritty
-    waybar
-    wofi
-    wlogout
-    wl-clipboard grim slurp swappy
-    swww
-    swaybg
-    mako libnotify
-    swaylock-effects
+    wl-clipboard
+    libnotify
     bluez blueman
     ffmpeg
     gcc gnumake
@@ -80,6 +74,11 @@
 
   programs.tmux.enable = true;
 
+  programs.noctalia = {
+    enable = true;
+    settings = ./config/noctalia/config.toml;
+  };
+
   fonts.fontconfig.enable = true;
 
   home.file = {
@@ -88,13 +87,9 @@
 
   xdg.configFile."alacritty".source = ./config/alacritty;
   xdg.configFile."nvim".source = ./config/nvim;
-  xdg.configFile."waybar".source = ./config/waybar;
   xdg.configFile."niri".source = ./config/niri;
-  xdg.configFile."wofi".source = ./config/wofi;
   xdg.configFile."wallpaper".source = ./config/wallpaper;
   xdg.configFile."scripts".source = ./config/scripts;
-  xdg.configFile."wlogout".source = ./config/wlogout;
-  xdg.configFile."mako".source = ./config/mako;
 
 }
 

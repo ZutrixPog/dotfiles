@@ -6,11 +6,13 @@
 
 let
   unstable = import <nixpkgs-unstable> {};
+  noctalia-greeter = builtins.getFlake "github:noctalia-dev/noctalia-greeter";
 in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      noctalia-greeter.nixosModules.default
     ];
 
   # Bootloader.
@@ -18,7 +20,7 @@ in
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "efi"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -26,12 +28,22 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+  # security.pki.certificateFiles = [ ./root.crt ];  # redacted: private CA
 
+  # networking.extraHosts = "...";  # redacted: internal host mapping
+
+  # Run Garbage Collector Weekley
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
+
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    extra-substituters = [ "https://noctalia.cachix.org" ];
+    extra-trusted-public-keys = [ "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=" ];
+  };   
 
   security.sudo = {
     enable = true;
@@ -55,6 +67,7 @@ in
       }
     ];
   };
+
 
   # Set your time zone.
   time.timeZone = "Asia/Tehran";
@@ -90,19 +103,63 @@ in
     variant = "";
   };
 
+  hardware.nvidia = {
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+  };
+
+  hardware.opengl = {
+    enable = true;
+  };
+
   services.xserver.enable = true;
   programs.xwayland.enable = true;
-  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
-  hardware.opengl.enable = true;
-  hardware.nvidia.powerManagement.enable = true;
-  hardware.nvidia.open = false;
-  hardware.nvidia.modesetting.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" "modesetting" ];
+  hardware.graphics.enable = true;
   # hardware.nvidia.prime.offload.enable = true;
 
-  services.xserver.displayManager.startx.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.displayManager.sessionPackages = [ pkgs.niri ];
+  # Noctalia greeter (greetd) replaces SDDM.
+  services.displayManager.sddm.enable = false;
+  services.displayManager.noctalia-greeter = {
+    enable = true;
+    settings = {
+      session.default = "niri";
+      appearance = {
+        scheme = "Gruvbox";
+        theme_mode = "dark";
+        wallpaper = {
+          path = "/home/erfan/.config/wallpaper/damavand-sunset.jpg";
+          fill_mode = "stretch";
+        };
+      };
+      clock = {
+        enabled = true;
+        position = "above-panel";
+        time_format = "{:%H:%M}";
+        date_format = "%A, %x";
+      };
+      keyboard = {
+        layout = "us,ir";
+        options = "grp:win_space_toggle,compose:ralt,ctrl:nocaps";
+        numlock = true;
+      };
+      cursor = {
+        theme = "Adwaita";
+        size = 24;
+      };
+    };
+  };
+
+  services.displayManager.sessionPackages = [ pkgs.niri ];
   programs.niri.enable = true;
+
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
+  services.logind.settings.Login.HandleLidSwitch = "ignore";
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -110,14 +167,6 @@ in
     alsa.enable = true;
     pulse.enable = true;
     wireplumber.enable = true;
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.erfan = {
-    isNormalUser = true;
-    description = "Erfan";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
-    packages = with pkgs; [];
   };
 
   services.openssh = {
@@ -134,11 +183,35 @@ in
   services.ollama = {
     enable = true;
     package = pkgs.ollama-cuda;
+    host = "0.0.0.0";
+    openFirewall = true;
+  }; 
+
+  # security.pki.certificates = [ ... ];  # redacted: private CA certificate
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.erfan = {
+    isNormalUser = true;
+    description = "Erfan";
+    extraGroups = [ "networkmanager" "wheel" "docker" "vboxusers" ];
+    packages = with pkgs; [];
+    shell = pkgs.zsh;
+    ignoreShellProgramCheck = true; 
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  virtualization.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    extraOptions = ''
+      --insecure-registry https://10.22.0.222
+    '';
+  };
+  virtualisation.virtualbox.host.enable = true;
+  services.resolved.enable = true;
+
+  programs.nekoray.tunMode.enable = true;
+  programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -149,37 +222,20 @@ in
 
     xwayland-satellite
     libinput
-    home-manager
-    brave jupyter
-    parted v2rayn
+    cudaPackages.cudatoolkit
+    firefox
+    home-manager nekoray python313Packages.pyinstaller jupyter
+    partclone parted
+    v2rayn
     qemu nmap ntfs3g
+    proxychains
+    unstable.opencode
+    unrar teamviewer
+    go
   ];
 
-  systemd.user.services.stand-reminder = {
-    description = "Hourly reminder to stand up and walk";
-    after = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    wantedBy = [ "graphical-session.target" ];
-
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = pkgs.writeShellScript "stand-reminder" ''
-        export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
-
-        while true; do
-          sleep 3600
-          ${pkgs.libnotify}/bin/notify-send \
-            -u critical \
-            -t 900000 \
-            -i "preferences-system-time" \
-            "Time to Move!" \
-            "Stand up and walk for a few minutes 💪"
-        done
-      '';
-      Restart = "always";
-      RestartSec = 30;
-      Environment = "DISPLAY=:0";
-    };
+  environment.sessionVariables = {
+    CUDA_PATH = "${pkgs.cudaPackages.cudatoolkit}";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -201,6 +257,34 @@ in
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  systemd.user.services.stand-reminder = {
+    description = "Hourly reminder to stand up and walk";
+    after = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
+    
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = pkgs.writeShellScript "stand-reminder" ''
+        # Get the user's bus address from the running environment
+        export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
+        
+        while true; do
+          sleep 3600
+          ${pkgs.libnotify}/bin/notify-send \
+            -u critical \
+            -t 900000 \
+            -i "preferences-system-time" \
+            "Time to Move!" \
+            "Stand up and walk for a few minutes 💪"
+        done
+      '';
+      Restart = "always";
+      RestartSec = 30;
+      Environment = "DISPLAY=:0";
+    };
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -208,5 +292,4 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "26.05"; # Did you read the comment?
-
 }

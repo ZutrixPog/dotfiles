@@ -1,0 +1,186 @@
+[theme]
+mode = "dark"
+source = "builtin"
+builtin = "Gruvbox"
+
+[shell]
+font_family = "ComicShannsMono Nerd Font"
+time_format = "{:%H:%M}"
+date_format = "%A, %x"
+
+[shell.screenshot]
+save_to_file = true
+directory = "/home/erfan/Pictures/Screenshots"
+copy_to_clipboard = true
+freeze_screen = true
+annotate = true
+
+[bar]
+order = ["main"]
+
+[bar.main]
+position = "top"
+background_opacity = 0.90
+compositor_blur = true
+radius = 10
+margin_ends = 300
+widget_spacing = 16
+padding = 18
+start  = ["launcher", "workspaces", "network", "cpu", "ram", "net_rx", "net_tx"]
+center = ["audio_visualizer", "active_window", "notifications"]
+end    = ["media", "tray", "volume", "brightness", "keyboard_layout", "clock", "battery", "control-center", "session"]
+
+[widget.cpu]
+type = "sysmon"
+stat = "cpu_usage"
+visualization = "gauge"
+
+[widget.ram]
+type = "sysmon"
+stat = "ram_pct"
+visualization = "gauge"
+
+[widget.net_rx]
+type = "sysmon"
+stat = "net_rx"
+network_speed_compact = true
+
+[widget.net_tx]
+type = "sysmon"
+stat = "net_tx"
+network_speed_compact = true
+
+[notification]
+enable_daemon = true
+position = "top_center"
+width = 420
+background_opacity = 0.97
+border = true
+max_visible = 5
+
+[idle.behavior.lock]
+timeout = 600
+action = "lock"
+enabled = true
+
+[idle.behavior.monitor_off]
+timeout = 660
+action = "screen_off"
+enabled = true
+
+[wallpaper]
+enabled = true
+fill_mode = "stretch"
+
+[wallpaper.default]
+path = "/home/erfan/.config/wallpaper/damavand-sunset.jpg"
+
+[backdrop]
+enabled = true
+
+[system.monitor]
+enabled = true
+
+[weather]
+enabled = true
+refresh_minutes = 30
+unit = "metric"
+effects = true
+
+[location]
+address = "Tehran, Iran"
+
+[desktop_widgets]
+enabled = true
+schema_version = 2
+widget_order = ["weather_main", "sysmon_cpu", "sysmon_ram", "sysmon_net", "media_main", "audio_main"]
+
+# grid r1c1 - weather (content-sized)
+[desktop_widgets.widget.weather_main]
+type = "weather"
+output = "HDMI-A-1"
+cx = 1848.0
+cy = 150.0
+box_width = 347.0
+box_height = 160.0
+
+[desktop_widgets.widget.weather_main.settings]
+color = "on_surface"
+shadow = true
+show_forecast = true
+forecast_days = 3
+
+# grid r1c2 - CPU usage graph + temp line
+[desktop_widgets.widget.sysmon_cpu]
+type = "sysmon"
+output = "HDMI-A-1"
+cx = 2210.0
+cy = 150.0
+box_width = 347.0
+box_height = 160.0
+
+[desktop_widgets.widget.sysmon_cpu.settings]
+display = "graph"
+stat = "cpu_usage"
+stat2 = "cpu_temp"
+show_label = true
+
+# grid r2c1 - RAM percent
+[desktop_widgets.widget.sysmon_ram]
+type = "sysmon"
+output = "HDMI-A-1"
+cx = 1848.0
+cy = 326.0
+box_width = 347.0
+box_height = 160.0
+
+[desktop_widgets.widget.sysmon_ram.settings]
+display = "gauge"
+stat = "ram_pct"
+show_label = true
+
+# grid r2c2 - network up/down
+[desktop_widgets.widget.sysmon_net]
+type = "sysmon"
+output = "HDMI-A-1"
+cx = 2210.0
+cy = 326.0
+box_width = 347.0
+box_height = 160.0
+
+[desktop_widgets.widget.sysmon_net.settings]
+display = "graph"
+stat = "net_rx"
+stat2 = "net_tx"
+show_label = true
+network_speed_unit = "auto"
+
+# lower block - media player (left 2 cols x 2 rows)
+[desktop_widgets.widget.media_main]
+type = "media_player"
+output = "HDMI-A-1"
+cx = 1908.0
+cy = 590.0
+box_width = 468.0
+box_height = 336.0
+
+[desktop_widgets.widget.media_main.settings]
+layout = "horizontal"
+hide_when_no_media = false
+color = "on_surface"
+shadow = true
+
+# lower block - visualizer (right 1 col x 2 rows, vertical)
+[desktop_widgets.widget.audio_main]
+type = "audio_visualizer"
+output = "HDMI-A-1"
+cx = 2271.0
+cy = 590.0
+box_width = 226.0
+box_height = 336.0
+
+[desktop_widgets.widget.audio_main.settings]
+bands = 32
+mirrored = true
+centered = true
+show_when_idle = true

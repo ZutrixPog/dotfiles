@@ -270,26 +270,47 @@ window-rule {
     clip-to-geometry true
 }
 
+// Noctalia settings window opens floating at a comfortable size.
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
+    geometry-corner-radius 20
+    clip-to-geometry true
+}
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
+// Noctalia shell: bar, notifications, wallpaper, lock, launcher, etc.
+spawn-at-startup "noctalia"
+
+// Noctalia backdrop for the overview (blurred wallpaper).
 layer-rule {
-    match namespace="waybar"
-
-    opacity 0.90
-
-    geometry-corner-radius 10
-
+    match namespace="^noctalia-backdrop"
     place-within-backdrop true
 }
 
-spawn-at-startup "swaybg" "-i" "/home/erfan/.config/wallpaper/hormuz.jpg" "-m" "stretch"
+// Blur Noctalia surfaces (requires niri 26.04+).
+layer-rule {
+    match namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+    background-effect {
+        blur true
+        xray false
+    }
+}
 
-spawn-at-startup "/home/erfan/.config/scripts/cachebgblur.sh"
+// Noctalia relies on XDG activation with a serial niri may consider invalid.
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
+blur {
+    passes 3
+}
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -395,10 +416,17 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Mod+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun" "--style" "/home/erfan/.config/wofi/themes/gruvbox.css"; }
-    Super+semicolon hotkey-overlay-title="Lock the Screen: swaylock" { spawn "/home/erfan/.config/scripts/lock"; }
+    Mod+D hotkey-overlay-title="Run an Application: Noctalia" { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+S hotkey-overlay-title="Toggle Control Center: Noctalia" { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+Shift+S hotkey-overlay-title="Open Settings: Noctalia" { spawn-sh "noctalia msg settings-toggle"; }
+    Alt+Tab hotkey-overlay-title="Window Switcher: Noctalia" { spawn-sh "noctalia msg window-switcher hold"; }
+    Super+semicolon hotkey-overlay-title="Lock the Screen: Noctalia" { spawn-sh "noctalia msg session lock"; }
     Super+E hotkey-overlay-title="Open File Explorer: thunar" { spawn "thunar"; }
-    Super+G hotkey-overlay-title="Open Power Menu: wlogout" { spawn "wlogout"; }
+    Super+G hotkey-overlay-title="Open Power Menu: Noctalia" { spawn-sh "noctalia msg panel-toggle session"; }
+    Mod+Shift+C hotkey-overlay-title="Open Clipboard: Noctalia" { spawn-sh "noctalia msg panel-toggle clipboard"; }
+    Mod+Shift+W hotkey-overlay-title="Open Wallpaper Picker: Noctalia" { spawn-sh "noctalia msg panel-toggle wallpaper"; }
+    Mod+Shift+A hotkey-overlay-title="Control Center - Audio: Noctalia" { spawn-sh "noctalia msg panel-toggle control-center audio"; }
+    Mod+Shift+N hotkey-overlay-title="Control Center - Network: Noctalia" { spawn-sh "noctalia msg panel-toggle control-center network"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -408,10 +436,10 @@ binds {
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
     // Using spawn-sh allows to pass multiple arguments together with the command.
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "noctalia msg volume-up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "noctalia msg volume-down"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "noctalia msg volume-mute"; }
+    XF86AudioMicMute     allow-when-locked=true { spawn-sh "noctalia msg mic-mute"; }
 
     // Example brightness key mappings for brightnessctl.
     // You can use regular spawn with multiple arguments too (to avoid going through "sh"),
@@ -427,8 +455,8 @@ binds {
     Mod+Q repeat=false { close-window; }
 
     Mod+Left  { focus-column-left; }
-    Mod+Down  { focus-window-down; }
-    Mod+Up    { focus-window-up; }
+    Mod+Down  hotkey-overlay-title="Volume Down: Noctalia" { spawn-sh "noctalia msg volume-down"; }
+    Mod+Up    hotkey-overlay-title="Volume Up: Noctalia" { spawn-sh "noctalia msg volume-up"; }
     Mod+Right { focus-column-right; }
     Mod+H     { focus-column-left; }
     Mod+J     { focus-window-down; }
@@ -625,9 +653,8 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Print { spawn-sh "noctalia msg screenshot-region"; }
+    Ctrl+Print { spawn-sh "noctalia msg screenshot-fullscreen pick"; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
@@ -646,4 +673,10 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
+}
+
+// Laptop lid: lock and suspend via Noctalia. Logind's lid handling is
+// disabled in the system config so niri owns this.
+switch-events {
+    lid-close { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
 }
