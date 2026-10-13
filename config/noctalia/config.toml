@@ -107,96 +107,99 @@ effects = true
 address = "Tehran, Iran"
 
 [desktop_widgets]
-enabled = false
+enabled = true
 schema_version = 2
-widget_order = ["weather_main", "sysmon_cpu", "sysmon_ram", "sysmon_net", "media_main", "audio_main"]
+widget_order = ["audio_top"]
 
-# grid r1c1 - weather (content-sized)
-[desktop_widgets.widget.weather_main]
-type = "weather"
-output = "HDMI-A-1"
-cx = 1848.0
-cy = 150.0
-box_width = 347.0
-box_height = 160.0
-
-[desktop_widgets.widget.weather_main.settings]
-color = "on_surface"
-shadow = true
-show_forecast = true
-forecast_days = 3
-
-# grid r1c2 - CPU usage graph + temp line
-[desktop_widgets.widget.sysmon_cpu]
-type = "sysmon"
-output = "HDMI-A-1"
-cx = 2210.0
-cy = 150.0
-box_width = 347.0
-box_height = 160.0
-
-[desktop_widgets.widget.sysmon_cpu.settings]
-display = "graph"
-stat = "cpu_usage"
-stat2 = "cpu_temp"
-show_label = true
-
-# grid r2c1 - RAM percent
-[desktop_widgets.widget.sysmon_ram]
-type = "sysmon"
-output = "HDMI-A-1"
-cx = 1848.0
-cy = 326.0
-box_width = 347.0
-box_height = 160.0
-
-[desktop_widgets.widget.sysmon_ram.settings]
-display = "gauge"
-stat = "ram_pct"
-show_label = true
-
-# grid r2c2 - network up/down
-[desktop_widgets.widget.sysmon_net]
-type = "sysmon"
-output = "HDMI-A-1"
-cx = 2210.0
-cy = 326.0
-box_width = 347.0
-box_height = 160.0
-
-[desktop_widgets.widget.sysmon_net.settings]
-display = "graph"
-stat = "net_rx"
-stat2 = "net_tx"
-show_label = true
-network_speed_unit = "auto"
-
-# lower block - media player (left 2 cols x 2 rows)
-[desktop_widgets.widget.media_main]
-type = "media_player"
-output = "HDMI-A-1"
-cx = 1908.0
-cy = 590.0
-box_width = 468.0
-box_height = 336.0
-
-[desktop_widgets.widget.media_main.settings]
-layout = "horizontal"
-hide_when_no_media = false
-color = "on_surface"
-shadow = true
-
-# lower block - visualizer (right 1 col x 2 rows, vertical)
-[desktop_widgets.widget.audio_main]
+# top-center visualizer, no background
+[desktop_widgets.widget.audio_top]
 type = "audio_visualizer"
 output = "HDMI-A-1"
-cx = 2271.0
-cy = 590.0
-box_width = 226.0
-box_height = 336.0
+cx = 1200.0
+cy = 210.0
+box_width = 600.0
+box_height = 120.0
 
-[desktop_widgets.widget.audio_main.settings]
+[desktop_widgets.widget.audio_top.settings]
+background = false
 bands = 32
 mirrored = true
 centered = true
 show_when_idle = true
+
+[lockscreen_widgets]
+enabled = true
+schema_version = 2
+widget_order = ["lockscreen-login-box@HDMI-A-1", "lockscreen-clock@HDMI-A-1", "lockscreen-visualizer@HDMI-A-1"]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    type = "login_box"
+    output = "HDMI-A-1"
+    cx = 1200.0
+    cy = 1168.0
+    box_width = 810.0
+    box_height = 196.0
+    placement_width = 2400.0
+    placement_height = 1350.0
+    rotation = 0.0
+    enabled = true
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-clock@HDMI-A-1"]
+    type = "clock"
+    output = "HDMI-A-1"
+    cx = 1200.0
+    cy = 200.0
+    box_width = 500.0
+    box_height = 160.0
+    placement_width = 2400.0
+    placement_height = 1350.0
+    rotation = 0.0
+    enabled = true
+
+        [lockscreen_widgets.widget."lockscreen-clock@HDMI-A-1".settings]
+        background = false
+        clock_style = "digital"
+        format = "{:%H:%M}"
+        center_text = true
+        color = "on_surface"
+        shadow = true
+
+    [lockscreen_widgets.widget."lockscreen-visualizer@HDMI-A-1"]
+    type = "audio_visualizer"
+    output = "HDMI-A-1"
+    cx = 1200.0
+    cy = 620.0
+    box_width = 600.0
+    box_height = 120.0
+    placement_width = 2400.0
+    placement_height = 1350.0
+    rotation = 0.0
+    enabled = true
+
+        [lockscreen_widgets.widget."lockscreen-visualizer@HDMI-A-1".settings]
+        background = false
+        bands = 32
+        mirrored = true
+        centered = true
+        show_when_idle = true
