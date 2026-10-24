@@ -457,6 +457,9 @@ binds {
     Mod+Left  { focus-column-left; }
     Mod+Down  hotkey-overlay-title="Volume Down: Noctalia" { spawn-sh "noctalia msg volume-down"; }
     Mod+Up    hotkey-overlay-title="Volume Up: Noctalia" { spawn-sh "noctalia msg volume-up"; }
+    Mod+Alt+Left  hotkey-overlay-title="Previous Track: Noctalia" { spawn-sh "noctalia msg media previous"; }
+    Mod+Alt+Right hotkey-overlay-title="Next Track: Noctalia" { spawn-sh "noctalia msg media next"; }
+    Mod+P     hotkey-overlay-title="Toggle Media: Noctalia" { spawn-sh "noctalia msg media toggle"; }
     Mod+Right { focus-column-right; }
     Mod+H     { focus-column-left; }
     Mod+J     { focus-window-down; }
